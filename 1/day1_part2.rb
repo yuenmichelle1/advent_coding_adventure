@@ -16,4 +16,4 @@ File.read('./day1_inputs.txt').split("\n") do |line|
   end
 end
 
-puts cal_tracker
+puts cal_tracker.sum
