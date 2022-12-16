@@ -2,7 +2,7 @@
 
 cal_tracker = [0, 0, 0]
 current_cals = 0
-File.read('./day1_inputs.txt').split("\n") do |line|
+File.open('./day1_inputs.txt').each_line do |line|
   line = line.strip
   if line.empty?
     if current_cals > cal_tracker[2]
