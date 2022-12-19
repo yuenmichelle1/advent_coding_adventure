@@ -11,11 +11,11 @@ def calculate_priority(item)
   end
 end
 
-def part_one
+def part_one(all_rucksacks)
   score = 0
-  File.open('./input.txt').each_line do |line|
-    first_compartment = line[0...(line.length / 2)].split('')
-    second_compartment = line[(line.length / 2)...(line.length - 1)].split('')
+  all_rucksacks.each do |rucksack|
+    first_compartment = rucksack[0...(rucksack.length / 2)].split('')
+    second_compartment = rucksack[(rucksack.length / 2)...rucksack.length].split('')
     similar_item = (first_compartment & second_compartment)[0]
     score += calculate_priority(similar_item)
   end
@@ -23,16 +23,17 @@ def part_one
   puts score
 end
 
-def part_two
+def part_two(all_rucksacks)
   score = 0
-  all_rucksacks = File.read('./input.txt').split("\n")
   all_rucksacks = all_rucksacks.map { |rucksack| rucksack.split('') }
   elves_bags_split_in_groups = all_rucksacks.each_slice(3).to_a
   elves_bags_split_in_groups.each do |group|
     badge = (group[0] & group[1] & group[2])[0]
     score += calculate_priority(badge)
   end
+
   puts score
 end
 
-part_two
+part_one(File.read('./input.txt').split("\n"))
+part_two(File.read('./input.txt').split("\n"))
