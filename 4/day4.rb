@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-def pair_sections(pair)
+def pair_ranges(pair)
   pair.split(',').map do |section|
     start, finish = section.split('-').map(&:to_i)
     Range.new(start, finish)
@@ -7,21 +7,17 @@ def pair_sections(pair)
 end
 
 def part_one(all_pairs)
-  fully_contained_set_count = 0
-  all_pairs.each do |pair|
-    elf_one_section, elf_two_section = pair_sections pair
-    fully_contained_set_count += 1 if elf_one_section.cover?(elf_two_section) || elf_two_section.cover?(elf_one_section)
+  all_pairs.count do |pair|
+    elf_one_range, elf_two_range = pair_ranges pair
+    elf_one_range.cover?(elf_two_range) || elf_two_range.cover?(elf_one_range)
   end
-  fully_contained_set_count
 end
 
 def part_two(all_pairs)
-  overlap_count = 0
-  all_pairs.each do |pair|
-    elf_one_section, elf_two_section = pair_sections pair
-    overlap_count += 1 if elf_one_section.cover?(elf_two_section.first) || elf_two_section.cover?(elf_one_section.first)
+  all_pairs.count do |pair|
+    elf_one_range, elf_two_range = pair_ranges pair
+    elf_one_range.cover?(elf_two_range.first) || elf_two_range.cover?(elf_one_range.first)
   end
-  overlap_count
 end
 
 puts part_one(File.read('./input.txt').split("\n"))
