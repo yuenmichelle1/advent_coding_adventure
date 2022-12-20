@@ -35,5 +35,5 @@ def part_two(all_rucksacks)
   puts score
 end
 
-part_one(File.read('./input.txt').split("\n"))
-part_two(File.read('./input.txt').split("\n"))
+part_one(File.readlines('./input.txt'))
+part_two(File.readlines('./input.txt'))

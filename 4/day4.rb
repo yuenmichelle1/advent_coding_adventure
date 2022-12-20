@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 def pair_ranges(pair)
   pair.split(',').map do |section|
     start, finish = section.split('-').map(&:to_i)
@@ -20,5 +21,5 @@ def part_two(all_pairs)
   end
 end
 
-puts part_one(File.read('./input.txt').split("\n"))
-puts part_two(File.read('./input.txt').split("\n"))
+puts part_one(File.readlines('./input.txt'))
+puts part_two(File.readlines('./input.txt'))
